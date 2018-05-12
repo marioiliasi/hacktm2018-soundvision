@@ -98,7 +98,7 @@ print(avg)
 mid = MidiFile()
 track = MidiTrack()
 mid.tracks.append(track)
-track.append(Message('program_change', program=4, time=0))
+track.append(Message('program_change', program=12, time=0))
 
 for k, v in songs_notes_map.items():
 	if count > notes_no:
@@ -106,49 +106,49 @@ for k, v in songs_notes_map.items():
 	split = k.split(" ")
 	n1 = split[0]
 	n2 = split[1]
-	i = random.randint(0, len(v)-1)
+	i = random.randint(0, len(v))
 	n3 = v[i]
 
-	keys1 = list(songs_times_map.keys())
+	keys = list(songs_times_map.keys())
 
-	#while (k not in songs_times_map):
-	#	k = random.randint(0, len(keys))
+	k = random.randint(0, len(keys))
+	while (k not in songs_times_map):
+		k = random.randint(0, len(keys))
 
-	#ra1 = random.randint(0, len(songs_times_map[k]))
-	#while (ra1 not in songs_times_map[k]):
-		#ra1 = random.randint(0, len(songs_times_map[k]))
-	krand = random.choice(keys1)
-	t1 = random.choice(songs_times_map[krand])
+	ra1 = random.randint(0, len(songs_times_map[k]))
+	while (ra1 not in songs_times_map[k]):
+		ra1 = random.randint(0, len(songs_times_map[k]))
+	t1 = ra1
 
-	#ra1 = random.randint(0, len(songs_times_map[k]))
-	#while (ra1 not in songs_times_map[k]):
-	#	ra1 = random.randint(0, len(songs_times_map[k]))
-	krand = random.choice(keys1)
-	t2 = random.choice(songs_times_map[krand])
+	ra1 = random.randint(0, len(songs_times_map[k]))
+	while (ra1 not in songs_times_map[k]):
+		ra1 = random.randint(0, len(songs_times_map[k]))
+	t2 = ra1
 
-	#ra1 = random.randint(0, len(songs_times_map[k]))
-	#while (ra1 not in songs_times_map[k]):
-	#	ra1 = random.randint(0, len(songs_times_map[k]))
-	krand = random.choice(keys1)
-	t3 = random.choice(songs_times_map[krand])
+	ra1 = random.randint(0, len(songs_times_map[k]))
+	while (ra1 not in songs_times_map[k]):
+		ra1 = random.randint(0, len(songs_times_map[k]))
+	t3 = ra1
 
-	keys1 = list(songs_velocities_map.keys())
-	kvel = random.choice(keys1)
-	#print(songs_velocities_map[kvel])
+	keys = list(songs_velocities_map.keys())
+	k = random.randint(0, len(keys))
+
+	t1 = songs_velocities_map[k][random.randint(0, len(songs_velocities_map[k]))]
+	t2 = songs_velocities_map[k][random.randint(0, len(songs_velocities_map[k]))]
+	t3 = songs_velocities_map[k][random.randint(0, len(songs_velocities_map[k]))]
+
 	ch = random.randint(0, 1)
-	m1 = Message('note_on' ,channel=ch,  note=int(n1), velocity=int(songs_velocities_map[kvel][0]), time=int(t1) * 2)
-	kvel = random.choice(keys1)
+	m1 = Message('note_on' ,channel=ch,  note=int(n1), velocity=int(vel1), time=int(t1))
 	ch = random.randint(0, 1)
-	m2 = Message('note_on' ,channel=ch,  note=int(n2), velocity=int(songs_velocities_map[kvel][0]), time=int(t2) * 2)
+	m2 = Message('note_on' ,channel=ch,  note=int(n2), velocity=int(vel2), time=int(t2))
 	if int(n3) % 2 == 0:
 		ch = 1
 	else:
 		ch = 0
-	kvel = random.choice(keys1)
-	m3 = Message('note_on' ,channel=ch,  note=int(n3), velocity=int(songs_velocities_map[kvel][0]), time=int(t3) * 2)
+	m3 = Message('note_on' ,channel=ch,  note=int(n3), velocity=int(vel3), time=int(t3))
 	count += 3
 	track.append(m1)
 	track.append(m2)
 	track.append(m3)
 
-mid.save('output/new_song5.mid')
+mid.save('output/new_song.mid')
